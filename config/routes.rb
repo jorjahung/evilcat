@@ -14,6 +14,8 @@ Evilcat::Application.routes.draw do
   get 'links/new' => 'links#new', as: :new_link
   post 'links' => 'links#create'
 
+  get 'links/:id' => 'links#show', as: :link
+
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

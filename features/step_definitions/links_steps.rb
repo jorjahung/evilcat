@@ -6,6 +6,14 @@ Given(/^I am on the new link page$/) do
   visit new_link_path
 end
 
+Given(/^I have added a link$/) do
+  visit new_link_path
+  fill_in "link[name]", with: "Google"
+  fill_in "link[url]", with: "http://google.com"
+  fill_in "link[description]", with: "You know what Google is."
+  click_button "Add Link"
+end
+
 When(/^I click on "(.*?)"$/) do |link|
   click_link link
 end
@@ -15,6 +23,11 @@ When(/^I add a new link$/) do
   fill_in "link[url]", with: "http://google.com"
   fill_in "link[description]", with: "You know what Google is."
   click_button "Add Link"
+end
+
+When(/^I view the profile page for that link$/) do
+  link = Link.find_by_name("Google")
+  visit link_path(link)
 end
 
 Then(/^I should see new link form$/) do
@@ -32,4 +45,10 @@ Then(/^I should see the link on the homepage$/) do
   expect(page).to have_content "Google"
   expect(page).to have_content "You know what Google is."
   expect(page).to have_link("Google", href: "http://google.com")
+end
+
+Then(/^I should see all its details$/) do
+  expect(page).to have_content "Google"
+  expect(page).to have_content "You know what Google is."
+  expect(page).to have_link("http://google.com", href: "http://google.com")
 end
