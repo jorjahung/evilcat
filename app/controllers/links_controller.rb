@@ -4,7 +4,20 @@ class LinksController < ApplicationController
   end
 
   def create
-    Link.create(link_params)
+    link  = Link.create(link_params)
+    html  = link.url
+    kit   = IMGKit.new(html)
+    img   = kit.to_img(:png)
+    file  = Tempfile.new(["template_#{link.id}", '.png'], 'tmp',
+                         :encoding => 'ascii-8bit')
+    file.write(img)
+    file.flush
+    link.screenshot = file
+    link.save
+    file.unlink
+    
+    # link.save
+
     redirect_to root_path
   end
 

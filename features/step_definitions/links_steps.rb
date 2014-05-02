@@ -52,3 +52,7 @@ Then(/^I should see all its details$/) do
   expect(page).to have_content "You know what Google is."
   expect(page).to have_link("http://google.com", href: "http://google.com")
 end
+
+Then(/^a screenshot of the page$/) do
+  expect(page).to have_xpath("//img[contains(@src, '/system/links/screenshots/')]")
+end

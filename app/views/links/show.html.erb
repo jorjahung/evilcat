@@ -1,3 +1,5 @@
 <h1><%= @link.name %></h1>
 <%= link_to @link.url, @link.url, class: 'subtitle' %>
 <p><%= @link.description %></p>
+
+<img src="<%= @link.screenshot.url %>">
