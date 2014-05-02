@@ -1,0 +1,9 @@
+<h1>EvilCat</h1>
+meow...
+<a href='links/new'>New</a>
+
+<ul>
+  <% @links.each do |link| %>
+    <li><%= link_to link.name, link.url %> -- <%= link.description %></li>
+  <% end%>
+</ul>
